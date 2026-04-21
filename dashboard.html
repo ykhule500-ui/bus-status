@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — CityTransit</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="dash-header">
+    <div class="container dash-header-inner">
+      <div class="dash-header-left">
+        <a href="../index.html" class="navbar-logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="20" rx="4" fill="#FF6B35"/><rect x="8" y="12" width="8" height="8" rx="2" fill="#0a1628" opacity="0.7"/><rect x="20" y="12" width="8" height="8" rx="2" fill="#0a1628" opacity="0.7"/><circle cx="12" cy="32" r="3" fill="#CBD5E1"/><circle cx="28" cy="32" r="3" fill="#CBD5E1"/></svg>
+          </div>
+          <span class="logo-text">City<span class="accent">Transit</span></span>
+        </a>
+      </div>
+      <div class="dash-header-right">
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">U</div>
+          <span class="user-name" id="user-name">User</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="logout()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="container">
+
+      <!-- Welcome Banner -->
+      <div class="welcome-banner glass-card" id="welcome-banner">
+        <div class="welcome-text">
+          <h1>Hello, <span class="accent" id="welcome-name">Traveler</span> 👋</h1>
+          <p>Search for buses between any two stops in the city. Enter your origin and destination below.</p>
+        </div>
+        <div class="welcome-icon">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="1" opacity="0.3"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+      </div>
+
+      <!-- Search Panel -->
+      <div class="search-panel glass-card" id="search-panel">
+        <h2 class="search-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          Find Your Bus
+        </h2>
+        <form class="search-form" id="search-form">
+          <div class="search-fields">
+            <div class="search-field">
+              <label for="from-stop">From</label>
+              <div class="autocomplete-wrapper">
+                <input type="text" id="from-stop" class="form-input" placeholder="Enter starting stop" autocomplete="off" required>
+                <div class="autocomplete-list" id="from-suggestions"></div>
+              </div>
+            </div>
+            <div class="search-swap" id="swap-btn" title="Swap stops">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+            </div>
+            <div class="search-field">
+              <label for="to-stop">To</label>
+              <div class="autocomplete-wrapper">
+                <input type="text" id="to-stop" class="form-input" placeholder="Enter destination stop" autocomplete="off" required>
+                <div class="autocomplete-list" id="to-suggestions"></div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg search-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            Search Buses
+          </button>
+        </form>
+      </div>
+
+      <!-- Results -->
+      <div class="results-section" id="results-section" style="display:none;">
+        <div class="results-header">
+          <h2 id="results-title">Available Buses</h2>
+          <span class="results-count" id="results-count"></span>
+        </div>
+        <div class="results-grid" id="results-grid">
+          <!-- Bus cards injected by JS -->
+        </div>
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" id="no-results" style="display:none;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2M9 9h.01M15 9h.01"/></svg>
+        <h3>No Buses Found</h3>
+        <p>We couldn't find any buses for this route. Try different stops.</p>
+      </div>
+
+      <!-- All Available Stops -->
+      <div class="stops-section glass-card" id="stops-section">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          All Available Stops
+        </h3>
+        <div class="stops-list" id="stops-list">
+          <!-- Stops injected by JS -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../js/global.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
