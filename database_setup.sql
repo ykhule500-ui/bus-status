@@ -1,6 +1,3 @@
--- ============================================
--- NAGPUR BUS MANAGEMENT SYSTEM DATABASE SETUP
--- ============================================
 
 -- Create Database
 CREATE DATABASE IF NOT EXISTS nagpur_transit;
@@ -53,10 +50,6 @@ CREATE TABLE IF NOT EXISTS bookings (
     FOREIGN KEY (passenger_id) REFERENCES passengers(id),
     FOREIGN KEY (bus_id) REFERENCES buses(id)
 );
-
--- ============================================
--- SEED DATA (NAGPUR SPECIFIC)
--- ============================================
 
 -- Seed Admin
 INSERT INTO admins (name, phone, password) VALUES ('Main Admin', '9999999999', 'admin123');
